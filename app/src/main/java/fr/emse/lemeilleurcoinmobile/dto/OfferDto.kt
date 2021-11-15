@@ -4,4 +4,4 @@ import fr.emse.lemeilleurcoinmobile.model.Category
 import java.util.*
 
 
-data class ProductDto(val id:Long, val description:String, val price: Double,val date:Date,val title: String, val emailOwner: String,val category: Category)
+data class OfferDto(val id:Long?, val description:String, val price: Double, val date:String?, val title: String, val userEmail: String, val category: Category)

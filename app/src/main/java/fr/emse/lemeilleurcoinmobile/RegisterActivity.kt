@@ -45,7 +45,7 @@ class RegisterActivity : AppCompatActivity() {
                                 putExtra(EMAIL_PARAM, email)
                             }
                             startActivity(intent)
-                            Toast.makeText(applicationContext,"Signing up succesfully !" , Toast.LENGTH_LONG).show()
+                            //Toast.makeText(applicationContext,"Signing up succesfully !" , Toast.LENGTH_LONG).show()
                         }else{
                             Toast.makeText(applicationContext,"Failure, something gone wrong, try later !" , Toast.LENGTH_LONG).show()
 

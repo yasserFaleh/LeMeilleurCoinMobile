@@ -8,15 +8,15 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface UserApiService {
-    @GET("users/check")
+    @GET("check")
     fun check(): Call<List<UserDto>>
 
-    @GET("users/login")
+    @GET("login")
     fun login(@Query("email") mail : String , @Query("pass") pass: String) : Call<UserDto>
 
-    @GET("users/{email}")
+    @GET("{email}")
     fun findById(@Path("email") id: String): Call<UserDto>
 
-    @GET("users/register")
+    @GET("register")
     fun register(@Query("email") mail : String , @Query("pass") pass: String,@Query("fullName") fullName : String , @Query("phoneNum") phoneNum: String) : Call<Boolean>
 }

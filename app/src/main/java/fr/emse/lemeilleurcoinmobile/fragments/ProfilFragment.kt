@@ -5,29 +5,27 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import fr.emse.lemeilleurcoinmobile.R
+import fr.emse.lemeilleurcoinmobile.adapters.ViewAdapter
+import fr.emse.lemeilleurcoinmobile.services.ApiServices
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import android.content.SharedPreferences
+import android.widget.Toast
+import fr.emse.lemeilleurcoinmobile.MenuActivity
+import kotlinx.coroutines.withContext
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ProfilFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class ProfilFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class ProfilFragment(menuActivity: MenuActivity) : Fragment() {
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+
     }
 
     override fun onCreateView(
@@ -38,23 +36,41 @@ class ProfilFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_profil, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ProfilFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ProfilFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val recyclerView = view.findViewById<RecyclerView>(R.id.views_recycler_view)
+        val adapter = ViewAdapter()
+
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+        recyclerView.setHasFixedSize(true)
+        recyclerView.adapter = adapter
+
+        val settings: SharedPreferences = view.context.getSharedPreferences("UserInfo", 0)
+        val email = settings.getString("Email", "").toString()
+
+        lifecycleScope.launch(context = Dispatchers.IO) {
+            runCatching {
+                ApiServices().viewApiService.getAllUserViews(email).execute()
             }
+                .onSuccess {
+                    withContext(context = Dispatchers.Main) {
+                        adapter.update(it.body() ?: emptyList())
+                    }
+                }
+                .onFailure {
+                    withContext(context = Dispatchers.Main) { // (3)
+                        Toast.makeText(
+                            view.context,
+                            "Error on windows loading $it",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }                }
+
+        }
+
+
+
     }
+
 }

@@ -24,9 +24,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val settings = getSharedPreferences("UserInfo", 0)
         val s = settings.getString("FullName", "").toString()
-        if ( !"".equals(s))
+        if ( !"".equals(s)){
             Toast.makeText(this, "hello $s", Toast.LENGTH_LONG).show()
-        //TODO go the menu
+            val intent = Intent(this, MenuActivity::class.java).apply {
+                //putExtra(WINDOW_NAME_PARAM, windowName)
+            }
+            startActivity(intent)
+        }
+
 
     }
     fun login(view: View){
@@ -66,6 +71,7 @@ class MainActivity : AppCompatActivity() {
                                     "Hello ${userDto.fullName}",
                                     Toast.LENGTH_LONG
                                 ).show()
+
                             }else {
                                 Toast.makeText(
                                     applicationContext,
@@ -73,6 +79,11 @@ class MainActivity : AppCompatActivity() {
                                     Toast.LENGTH_LONG
                                 ).show()
                             }
+
+                            val intent = Intent(applicationContext, MenuActivity::class.java).apply {
+                                //putExtra(WINDOW_NAME_PARAM, windowName)
+                            }
+                            startActivity(intent)
 
                         }
                     }
