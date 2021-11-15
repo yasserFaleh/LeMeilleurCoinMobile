@@ -32,7 +32,7 @@ class MenuActivity : AppCompatActivity() {
 
 
     }
-    public fun replaceFragment(int : Int){
+     fun replaceFragment(int : Int){
         if ( int == 1)
             replaceFragment(searchFragment)
         else if ( int == 2)
@@ -40,7 +40,7 @@ class MenuActivity : AppCompatActivity() {
         else
             replaceFragment(profilFragment)
     }
-    private fun replaceFragment(fragment: Fragment){
+     fun replaceFragment(fragment: Fragment){
         if ( fragment != null ){
             val transaction = supportFragmentManager.beginTransaction()
             transaction.replace(R.id.fragment_container, fragment)

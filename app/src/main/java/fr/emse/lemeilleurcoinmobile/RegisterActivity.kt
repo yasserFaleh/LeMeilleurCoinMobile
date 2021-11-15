@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.util.Patterns
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
@@ -19,6 +20,7 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
     }
+    // function to execute when the button register is pressed
     fun register(view: View){
         //check the fields are valid
         val email = findViewById<EditText>(R.id.email).text.toString()
@@ -26,33 +28,37 @@ class RegisterActivity : AppCompatActivity() {
         val phoneNum = findViewById<EditText>(R.id.phone).text.toString()
         val fullName = findViewById<EditText>(R.id.fullname).text.toString()
 
-        if ( "".equals(email))
-            Toast.makeText(this, "Please enter your Email", Toast.LENGTH_LONG).show()
+        // Show a message if a field is empty
+        if ( "".equals(email) || !email.isValidEmail())
+            Toast.makeText(this, "Please enter a Valid Email", Toast.LENGTH_LONG).show()
         else if ( "".equals(pass) || pass.length < 8)
             Toast.makeText(this, "Please enter a valid password : more than 8 digits", Toast.LENGTH_LONG).show()
         else if ( "".equals(phoneNum) || phoneNum.length != 10 )
             Toast.makeText(this, "Please enter  a valid 10 digits Phone number", Toast.LENGTH_LONG).show()
-        else if ( "".equals(fullName) || fullName.length < 8)
-            Toast.makeText(this, "Please enter a more than 8 digits Full Name", Toast.LENGTH_LONG).show()
+        else if ( "".equals(fullName) || fullName.length < 5)
+            Toast.makeText(this, "Please enter a more than 5 digits Full Name", Toast.LENGTH_LONG).show()
+
+        // now  fields are valid we can go through the registration
         else{
             // call api for signing up
             lifecycleScope.launch(context = Dispatchers.IO) {
                 runCatching { ApiServices().userApiService.register(email,pass,fullName,phoneNum).execute() } // call login api with 2 params mail and pass
                     .onSuccess {
-                        if ( it.body().toString().equals("true") ){
-
-                            val intent = Intent(applicationContext, MainActivity::class.java).apply {
-                                putExtra(EMAIL_PARAM, email)
+                        withContext(context = Dispatchers.Main) {
+                            if (it.body().toString().equals("true")) {
+                                // go to the menu activity
+                                val intent = Intent(applicationContext, MainActivity::class.java).apply {
+                                        putExtra(EMAIL_PARAM, email)
+                                    }
+                                startActivity(intent)
+                            } else {
+                                Toast.makeText(
+                                    applicationContext,
+                                    "Failure, something gone wrong may the email is used , try an other one !",
+                                    Toast.LENGTH_LONG
+                                ).show()
                             }
-                            startActivity(intent)
-                            //Toast.makeText(applicationContext,"Signing up succesfully !" , Toast.LENGTH_LONG).show()
-                        }else{
-                            Toast.makeText(applicationContext,"Failure, something gone wrong, try later !" , Toast.LENGTH_LONG).show()
-
                         }
-
-
-
                     }
                     .onFailure {
                         withContext(context = Dispatchers.Main) { // (3)
@@ -69,4 +75,5 @@ class RegisterActivity : AppCompatActivity() {
 
 
     }
+    fun CharSequence?.isValidEmail() = !isNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(this).matches()
 }

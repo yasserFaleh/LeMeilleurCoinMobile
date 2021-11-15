@@ -41,6 +41,8 @@ class AddProductFragment(val menuActivity: MenuActivity) : Fragment() {
         var title_text = view.findViewById<EditText>(R.id.title_text)
         var desc_text = view.findViewById<EditText>(R.id.description_text)
         var price_text = view.findViewById<EditText>(R.id.price_text)
+
+
         var type: Type
 
 
@@ -74,7 +76,7 @@ class AddProductFragment(val menuActivity: MenuActivity) : Fragment() {
 
         //add listener to button create
         val cardView: CardView
-        cardView = view.findViewById(R.id.cardSearch)
+        cardView = view.findViewById(R.id.cardSave)
         cardView.setOnClickListener {
             var category: Category
             var type: Type

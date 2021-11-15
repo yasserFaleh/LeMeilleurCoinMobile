@@ -15,4 +15,9 @@ interface OfferApiService {
     @POST("create")
     fun create(@Body offerDto: OfferDto): Call<OfferDto>
 
+    @GET("own/{email}")
+    fun getAllOffersByUser(@Path("email") email: String):Call<List<OfferDto>>
+
+    @DELETE("{id}")
+    fun delete(@Path("id")id :Long?,@Query("pass") password: String): Call<Boolean>
 }

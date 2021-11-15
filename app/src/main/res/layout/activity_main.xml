@@ -18,27 +18,27 @@
 
     <EditText
         android:id="@+id/pass"
-        android:layout_width="250dp"
+        android:layout_width="330dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/email"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
-        android:background="#11000000"
-        android:drawableLeft="@drawable/ic_action_password"
+        android:drawableLeft="@drawable/ic_pass_colored"
         android:ems="10"
+        android:drawablePadding="10dp"
         android:hint="password"
         android:inputType="textPersonName|textPassword"
         android:minHeight="48dp" />
 
     <EditText
         android:id="@+id/email"
-        android:layout_width="250dp"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/imageView"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="70dp"
-        android:background="#11000000"
-        android:drawableLeft="@drawable/ic_action_email"
+        android:drawablePadding="10dp"
+        android:drawableLeft="@drawable/ic_email_colored"
         android:ems="10"
         android:hint="Email"
         android:inputType="textEmailAddress"

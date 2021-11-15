@@ -13,6 +13,18 @@
         android:layout_marginLeft="30dp"
         android:layout_marginTop="10dp"
         app:srcCompat="@drawable/logo" />
+    <Button
+        android:id="@+id/log_out"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="30dp"
+        android:backgroundTint="#f00"
+        android:text="Log out"
+        android:textColor="#fff"
+        android:textStyle="bold"
+        android:textSize="10sp" />
 
     <TextView
         android:layout_width="wrap_content"

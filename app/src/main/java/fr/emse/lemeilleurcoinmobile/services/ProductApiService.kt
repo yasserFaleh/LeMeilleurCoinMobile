@@ -1,5 +1,6 @@
 package fr.emse.lemeilleurcoinmobile.services
 
+import fr.emse.lemeilleurcoinmobile.dto.OfferDto
 import fr.emse.lemeilleurcoinmobile.dto.ProductDto
 import fr.emse.lemeilleurcoinmobile.dto.UserDto
 import fr.emse.lemeilleurcoinmobile.dto.ViewDto
@@ -15,4 +16,9 @@ interface ProductApiService {
     @POST("create")
     fun create(@Body productDto: ProductDto): Call<ProductDto>
 
+    @GET("own/{email}")
+    fun getAllProductsByUser(@Path("email") email: String):Call<List<ProductDto>>
+
+    @DELETE("{id}")
+    fun delete( @Path("id")id :Long?,@Query("pass") password: String): Call<Boolean>
 }

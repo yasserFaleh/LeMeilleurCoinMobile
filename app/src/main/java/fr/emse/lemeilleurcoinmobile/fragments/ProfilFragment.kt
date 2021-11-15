@@ -1,5 +1,7 @@
 package fr.emse.lemeilleurcoinmobile.fragments
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -18,9 +20,12 @@ import android.content.SharedPreferences
 import android.widget.Toast
 import fr.emse.lemeilleurcoinmobile.MenuActivity
 import kotlinx.coroutines.withContext
+import android.preference.PreferenceManager
+import android.widget.Button
+import fr.emse.lemeilleurcoinmobile.MainActivity
 
 
-class ProfilFragment(menuActivity: MenuActivity) : Fragment() {
+class ProfilFragment(val menuActivity: MenuActivity) : Fragment() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,6 +54,23 @@ class ProfilFragment(menuActivity: MenuActivity) : Fragment() {
         val settings: SharedPreferences = view.context.getSharedPreferences("UserInfo", 0)
         val email = settings.getString("Email", "").toString()
 
+        // logout button
+        val logOut = view.findViewById<Button>(R.id.log_out)
+        logOut.setOnClickListener(){
+            signOut(context)
+        }
+        //edit profil button
+        val edit_profil = view.findViewById<Button>(R.id.edit_gen_info)
+        edit_profil.setOnClickListener(){
+            menuActivity.replaceFragment(modifyProfilFragment(menuActivity))
+        }
+
+        //view products and offers button
+        val go_to = view.findViewById<Button>(R.id.visualize_offers_and_products)
+        go_to.setOnClickListener(){
+            menuActivity.replaceFragment(OffersAndProductsFragment(menuActivity))
+        }
+
         lifecycleScope.launch(context = Dispatchers.IO) {
             runCatching {
                 ApiServices().viewApiService.getAllUserViews(email).execute()
@@ -71,6 +93,17 @@ class ProfilFragment(menuActivity: MenuActivity) : Fragment() {
 
 
 
+    }
+    fun  signOut(context: Context?){
+        val mySPrefs = context?.getSharedPreferences("UserInfo",0)
+        val editor = mySPrefs?.edit()
+        editor?.remove("Email")
+        editor?.remove("Password")
+        editor?.apply()
+
+        val intent = Intent(context, MainActivity::class.java).apply {
+        }
+        startActivity(intent)
     }
 
 }

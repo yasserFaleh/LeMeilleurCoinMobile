@@ -82,7 +82,7 @@ class SearchFragment(menuActivity: MenuActivity) : Fragment() {
         }
 
         val cardView: CardView
-        cardView = view.findViewById(R.id.cardSearch)
+        cardView = view.findViewById(R.id.cardSave)
         cardView.setOnClickListener{
             var category: Category?
             var type :Type
