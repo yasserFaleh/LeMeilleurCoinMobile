@@ -80,8 +80,7 @@ class modifyProfilFragment(val menuActivity: MenuActivity) : Fragment() {
             fullName = fullName_edit.text.toString()
             new_password = pass_edit.text.toString()
             phone = phone_edit.text.toString()
-
-            if (new_password.length > 8 && fullName.length > 5 && phone.length == 10) {
+            if (new_password.length > 7 && fullName.length > 5 && phone.length == 10) {
                 // call api to save
                 lifecycleScope.launch(context = Dispatchers.IO) {
                     runCatching {
@@ -100,10 +99,9 @@ class modifyProfilFragment(val menuActivity: MenuActivity) : Fragment() {
                         }
                         .onFailure {
                             withContext(context = Dispatchers.Main) {
-                                Log.v("ddd","${it.message}")
                                 Toast.makeText(
                                     view.context,
-                                    "$it",
+                                    "Saving failed",
                                     Toast.LENGTH_LONG
                                 ).show()
                             }
