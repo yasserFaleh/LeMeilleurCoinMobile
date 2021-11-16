@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context=".fragments.editProductOrProductFragment">
+
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="60dp"
+        android:layout_toRightOf="@id/category_text"
+        android:spinnerMode="dropdown" />
+
+    <TextView
+        android:id="@+id/category_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="60dp"
+        android:text="Category: "
+        android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/title_const"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="45dp"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            android:layout_below="@id/category_text"
+            android:text="Title" />
+
+    <EditText
+        android:id="@+id/title_text"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title_const"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="10dp"
+        android:hint="Enter a title"
+        android:minHeight="48dp" />
+        <TextView
+            android:id="@+id/desc_const"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="45dp"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            android:layout_below="@id/title_text"
+            android:text="Description" />
+
+    <EditText
+        android:id="@+id/description_text"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:layout_below="@id/desc_const"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="10dp"
+        android:hint="More description here !"
+
+        android:inputType="textMultiLine"
+        android:minHeight="48dp" />
+
+    <TextView
+        android:id="@+id/price_const"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/description_text"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="20dp"
+        android:text="Price (€)"
+        android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/price_text"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/price_const"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="10dp"
+            android:hint="Euro €"
+            android:inputType="number"
+            android:minHeight="48dp" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardSave"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="80dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="40dp"
+            app:cardBackgroundColor="#ff6e14"
+            app:cardCornerRadius="25dp"
+            android:layout_alignParentBottom="true"
+            app:cardElevation="10dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="Save"
+                    android:textColor="#000"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardCancel"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="80dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="40dp"
+        app:cardBackgroundColor="#ff6e14"
+        app:cardCornerRadius="25dp"
+        android:layout_alignParentBottom="true"
+        app:cardElevation="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Cancel"
+                android:textColor="#000"
+                android:textSize="18sp" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>

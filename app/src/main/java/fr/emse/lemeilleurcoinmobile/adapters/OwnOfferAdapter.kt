@@ -14,6 +14,7 @@ import fr.emse.lemeilleurcoinmobile.dto.OfferDto
 import fr.emse.lemeilleurcoinmobile.dto.ProductDto
 import fr.emse.lemeilleurcoinmobile.dto.ViewDto
 import fr.emse.lemeilleurcoinmobile.fragments.OffersAndProductsFragment
+import fr.emse.lemeilleurcoinmobile.fragments.editProductOrProductFragment
 import fr.emse.lemeilleurcoinmobile.services.ApiServices
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -24,6 +25,7 @@ class OwnOfferAdapter(val menuActivity: MenuActivity) : RecyclerView.Adapter<Own
     private val items = mutableListOf<OfferDto>()
 
     inner class ViewHolder(itemView : View): RecyclerView.ViewHolder(itemView){
+        var id:Long = 0
         var title: TextView
         var description: TextView
         var date : TextView
@@ -48,6 +50,7 @@ class OwnOfferAdapter(val menuActivity: MenuActivity) : RecyclerView.Adapter<Own
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val offer = items[position]
         holder.apply {
+            id = offer.id!!
             title.text = offer.title
             description.text = offer.description
             date.text = offer.date?.subSequence(0, 10)
@@ -59,7 +62,7 @@ class OwnOfferAdapter(val menuActivity: MenuActivity) : RecyclerView.Adapter<Own
 
             edit.setOnClickListener() {
                 // open the
-                //menuActivity.replaceFragment()
+                menuActivity.replaceFragment(editProductOrProductFragment(menuActivity,false,id))
             }
             delete.setOnClickListener() {
                 CoroutineScope(Dispatchers.IO).launch {

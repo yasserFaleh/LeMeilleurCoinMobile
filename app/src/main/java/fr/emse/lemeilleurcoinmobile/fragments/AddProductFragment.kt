@@ -84,7 +84,7 @@ class AddProductFragment(val menuActivity: MenuActivity) : Fragment() {
             var description: String
             var price: Double
 
-            // get the email of the 
+            // get the email of the user connected
             val settings = context?.getSharedPreferences("UserInfo", 0)
             val email = settings?.getString("Email", "").toString()
 

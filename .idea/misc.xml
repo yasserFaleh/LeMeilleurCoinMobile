@@ -15,6 +15,7 @@
         <entry key="app/src/main/res/layout/bad_view_card_layout.xml" value="0.16770833333333332" />
         <entry key="app/src/main/res/layout/fragment_add_product.xml" value="0.45" />
         <entry key="app/src/main/res/layout/fragment_change_profil.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_edit_product_or_product.xml" value="0.16770833333333332" />
         <entry key="app/src/main/res/layout/fragment_modify_profil.xml" value="0.21041666666666667" />
         <entry key="app/src/main/res/layout/fragment_offers_and_products.xml" value="0.16770833333333332" />
         <entry key="app/src/main/res/layout/fragment_profil.xml" value="0.3098958333333333" />

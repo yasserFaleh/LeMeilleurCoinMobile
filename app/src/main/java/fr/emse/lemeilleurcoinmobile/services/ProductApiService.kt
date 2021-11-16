@@ -21,4 +21,10 @@ interface ProductApiService {
 
     @DELETE("{id}")
     fun delete( @Path("id")id :Long?,@Query("pass") password: String): Call<Boolean>
+
+    @GET("product/{id}")
+    fun get(@Path("id") id: Long): Call<ProductDto>
+
+    @POST("modify")
+    fun modify(@Query("pass") password: String, @Body productDto: ProductDto):Call<ProductDto>
 }

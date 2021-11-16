@@ -20,4 +20,11 @@ interface OfferApiService {
 
     @DELETE("{id}")
     fun delete(@Path("id")id :Long?,@Query("pass") password: String): Call<Boolean>
+
+    @GET("offer/{id}")
+    fun get(@Path("id") id: Long): Call<OfferDto>
+
+    @POST("modify")
+    fun modify(@Query("pass") password: String, @Body offerDto: OfferDto): Call<OfferDto>
+
 }

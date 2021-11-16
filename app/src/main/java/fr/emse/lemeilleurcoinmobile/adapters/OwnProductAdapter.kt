@@ -13,6 +13,7 @@ import fr.emse.lemeilleurcoinmobile.R
 import fr.emse.lemeilleurcoinmobile.dto.ProductDto
 import fr.emse.lemeilleurcoinmobile.dto.ViewDto
 import fr.emse.lemeilleurcoinmobile.fragments.OffersAndProductsFragment
+import fr.emse.lemeilleurcoinmobile.fragments.editProductOrProductFragment
 import fr.emse.lemeilleurcoinmobile.services.ApiServices
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -23,6 +24,7 @@ class OwnProductAdapter(val menuActivity: MenuActivity): RecyclerView.Adapter<Ow
     private val items = mutableListOf<ProductDto>()
 
     inner class ViewHolder(itemView : View): RecyclerView.ViewHolder(itemView){
+        var id:Long = 0
         var title: TextView
         var description: TextView
         var date : TextView
@@ -47,6 +49,7 @@ class OwnProductAdapter(val menuActivity: MenuActivity): RecyclerView.Adapter<Ow
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val product = items[position]
         holder.apply {
+            id = product.id!!
             title.text = product.title
             description.text = product.description
             date.text = product.date?.subSequence(0,10)
@@ -57,8 +60,8 @@ class OwnProductAdapter(val menuActivity: MenuActivity): RecyclerView.Adapter<Ow
             val password = settings?.getString("Password", "").toString()
 
             edit.setOnClickListener() {
-                // open the
-                //menuActivity.replaceFragment()
+                // open the edit fragment
+                menuActivity.replaceFragment(editProductOrProductFragment(menuActivity,true,id))
             }
             delete.setOnClickListener() {
                 CoroutineScope(Dispatchers.IO).launch {
